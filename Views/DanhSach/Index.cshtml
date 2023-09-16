@@ -1,0 +1,96 @@
+﻿@model IEnumerable<TranKhanhLinh.Models.DanhSach.ModelDanhSach>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex flex-column">
+    <h1 class="text-center my-5 text-uppercase">Giao diện bán hàng</h1>
+    <div class="col-12">
+        <div class="d-flex flex-row justify-content-center gap-5">
+            <div class="col-4 px-5 border rounded-3 d-flex flex-column justify-content-center shadow p-3 mb-5">
+                <form action="/DanhSach" method="post">
+                    <div class="mb-3">
+                        <label for="tenSanPham" class="form-label">Tên sản phẩm</label>
+                        <input type="text" class="form-control" id="tenSanPham" name="tenSanPham" value="@ViewData["TenSanPham"]" aria-describedby="text">
+                    </div>
+                    <div class="mb-3">
+                        <label for="soLuong" class="form-label">Số lượng</label>
+                        <input type="number" class="form-control" id="soLuong" name="soLuong" value="@ViewData["SoLuong"]" aria-describedby="text">
+                    </div>
+                    <div class="mb-3">
+                        <label for="donGia" class="form-label">Đơn giá bán</label>
+                        <input type="number" class="form-control" id="donGia" name="donGia" value="@ViewData["DonGia"]" aria-describedby="text">
+                    </div>
+                    <div class="mb-3">
+                        <label for="giamGia" class="form-label">Giảm giá</label>
+                        <input type="number" class="form-control" id="giamGia" name="giamGia" value="@ViewData["GiamGia"]" aria-describedby="text">
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center mt-5">
+                        <button type="submit" id="themvaogiohang" class="btn btn-primary px-4  me-1">Thêm vào giỏ hàng</button>
+                        <a type="button" id="thanhtoan" class="btn btn-outline-warning px-4 py-2" href="@Url.Action("Index","DanhSach", new {check = true})" onclick="HienThiThongBao">Thanh toán</a>
+                    </div>
+                </form>
+            </div>
+    
+            <div class="container mt-5">
+                <div class="d-flex flex-row justify-content-between gap-3">
+                    <div class="col-12 border-1 rounded-3 shadow p-3 mb-5 " style="height: 580px;">
+                        <h2 class="fw-bold text-center pt-5 pb-4">
+                            Danh sách sản phẩm
+                            <hr />
+                            <div style="max-height: 360px; overflow-y : auto;" class="px-3">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Tên Sản Phẩm</th>
+                                            <th scope="col">Số Lượng</th>
+                                            <th scope="col">Đơn Giá</th>
+                                            <th scope="col" class="text-end">Tạm Tính</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            int i = 0;
+                                            foreach (var item in Model)
+                                            {
+                                                i++;
+                                                <tr>
+                                                    <td class="text-center">@i</td>
+                                                    <td class="text-center">@item.TenSanPham</td>
+                                                    <td class="text-center">@item.SoLuong</td>
+                                                    <td class="text-center">@item.DonGia</td>
+                                                    <td class="text-center">@item.TamTinh</td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td colspan="6" class="text-center">Không có dữ liệu</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="d-flex flex-column text-end">
+                                    <p class="fw-bold float-end px-3" id="TongThanhTien">Tổng Thành Tiền: @Model.Sum(c => c.TamTinh) đồng</p>
+                                </div>
+                                
+                            </div>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function HienThiThongBao() {
+        var message = $('#TongThanhTien').text()
+        alert(message)
+    }
+</script>
+

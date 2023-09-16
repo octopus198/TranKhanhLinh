@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Lien He";
+}
+
+<div class="d-flex flex-column">
+    <h1 class="text-center my-5 text-uppercase">Thông Tin Học Viên</h1>
+    <div class="col-12">
+        <div class="d-flex flex-row justify-content-center gap-5">
+            <div class="col-4 px-5 border rounded-3 d-flex flex-column justify-content-center shadow p-3 mb-5">
+                <form action="/DanhSach" method="post">
+                    <div class="mb-3">
+                        <label for="tenSanPham" class="form-label">Họ Tên</label>
+                        <input type="text" class="form-control" id="hoTen" name="hoTen" value="@ViewData["HoTen"]" aria-describedby="text">
+                    </div>
+                    <div class="mb-3">
+                        <label for="soLuong" class="form-label">Ngày Sinh</label>
+                        <input type="date" class="form-control" id="ngaySinh" name="ngaySinh" value="@ViewData["NgaySinh"]" aria-describedby="text">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="@ViewData["Email"]" aria-describedby="text">
+                    </div>
+                    <div class="mb-3">
+                        <label for="soDienThoai" class="form-label">Số Điện Thoại</label>
+                        <input type="number" class="form-control" id="soDienThoai" name="soDienThoai" value="@ViewData["SoDienThoai"]" aria-describedby="text">
+                    </div>
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
